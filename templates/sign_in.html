@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+      <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
+          <h2 class="active"> Войти </h2>
+          <a class="inactive underlineHover" href="/sign_up">Зарегистрироваться </a>
+
+          <!-- Icon -->
+          <div class="fadeIn first">
+            <img src="static/img/icon.png" id="icon" alt="User Icon" />
+          </div>
+
+          <!-- Login Form -->
+          <form>
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Логин">
+            <input type="text" id="password" class="fadeIn third" name="login" placeholder="Пароль">
+            <input type="submit" class="fadeIn fourth" value="Войти">
+          </form>
+
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+            <a class="underlineHover" href="#">Забыли пароль?</a>
+          </div>
+{% endblock %}

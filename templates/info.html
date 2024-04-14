@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<div class="single-item">
+  <div class="left-set">
+    <img src="static/img/{{item[4]}}" alt=""/>
+  </div>
+  <div class="right-set">
+    <div class="name">{{item[0]}}</div>
+    <div class="price">Средняя цена: {{item[2]}}</div>
+    <div class="description">
+    <p>
+      {{item[1]}}
+    </p>
+    </div>
+    {%for n in item[3].split('+')%}
+    <form action={{n}}>
+      <button>Перейти в магазин</button>
+    </form>
+    <br>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

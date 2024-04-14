@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="cards">
+          <!-- Карточка товара -->
+  {% for item in inf %}
+  <div class="card">
+    <!-- Верхняя часть -->
+    <div class="card__top">
+      <!-- Изображение-ссылка товара -->
+      <a href="/info/{{item[1]}}" class="card__image">
+        <img
+          src="static/img/{{item[0]}}"
+          alt={{item[1]}}
+        />
+      </a>
+    </div>
+    <!-- Нижняя часть -->
+    <div class="card__bottom">
+    <div class="card__prices">
+      <div class="card__price card__price--common">{{item[2]}}</div>
+    </div>
+      <!-- Ссылка-название товара -->
+      <a href="/info/{{item[1]}}" class="card__title">
+        {{item[1]}}
+      </a>
+      <!-- Кнопка добавить в корзину -->
+      <a href="/info/{{item[1]}}">
+      <button  class="card__add">Посмотреть</button>
+      </a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
