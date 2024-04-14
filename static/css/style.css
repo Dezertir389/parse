@@ -1,0 +1,544 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+/* BASIC */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.area(@width:1rem, @height:1rem) {
+  width: @width;
+  height: @height;
+}
+
+
+.single-item {
+  .centered;
+  .area(540px, 360px);
+  border: solid 6px #fff;
+  border-radius: 10px;
+  background: #f5f5f5;
+  box-shadow: 0 30px 20px -20px rgba(0,0,0,0.3);
+  box-sizing: border-box;
+}
+
+.left-set, .right-set {
+  position: relative;
+  width: 50%;
+  height: 100%;
+}
+.left-set {
+  float: left;
+  img {
+    .centered;
+    .area(300px, 300px);
+  }
+}
+.right-set {
+  float: right;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  .name, .subname {
+    font-weight: bold;
+  }
+  .name {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+  .subname {
+    font-size: 0.8rem;
+    line-height: 1rem;
+  }
+  .price {
+    padding: 1rem 0;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  .description p{
+    font-size: 0.9rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .color {
+    margin: 1rem 0;
+    &:after {
+      content: "";
+      display: block;
+      clear: left;
+    }
+    ul {
+      li {
+        .area(20px, 20px);
+        border: solid 2px #aaa;
+        border-radius: 4px;
+        float: left;
+        margin-right: 0.4rem;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        &:nth-child(1) {
+          background: #222;
+          &:hover {
+            border-color: #222;
+          }
+        }
+        &:nth-child(2) {
+          background: crimson;
+          &:hover {
+            border-color: crimson;
+          }
+        }
+      }
+    }
+  }
+  button {
+    width: 100%;
+    height: 2rem;
+    cursor: pointer;
+    background: none;
+    border: solid 2px #111;
+    border-radius: 4px;
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+    transition: all 0.4s ease;
+    &:hover {
+      background: #70e1f5;
+    }
+  }
+}
+.cards {
+  display: grid;
+  /* Автоматически заполняем на всю ширину grid-контейнера */
+  grid-template-columns: repeat(auto-fill, 225px);
+  width: 100%;
+  max-width: 1000px; /* Ширина grid-контейнера */
+  justify-content: center;
+  justify-items: center; /* Размещаем карточку по центру */
+  column-gap: 30px; /* Отступ между колонками */
+  row-gap: 40px; /* Отступ между рядами */
+  margin: 0 auto;
+}
+.card {
+  width: 225px;
+  min-height: 350px;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column; /* Размещаем элементы в колонку */
+  border-radius: 4px;
+  transition: 0.2s;
+  position: relative;
+}
+
+/* При наведении на карточку - меняем цвет тени */
+.card:hover {
+  box-shadow: 4px 8px 16px rgba(144, 144, 144);
+}
+
+.card__top {
+  flex: 0 0 220px; /* Задаем высоту 220px, запрещаем расширение и сужение по высоте */
+  position: relative;
+  overflow: hidden; /* Скрываем, что выходит за пределы */
+}
+
+/* Контейнер для картинки */
+.card__image {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.card__image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Встраиваем картинку в контейнер card__image */
+  transition: 0.2s;
+}
+
+/* При наведении - увеличиваем картинку */
+.card__image:hover > img {
+  transform: scale(1.1);
+}
+
+/* Размещаем скидку на товар относительно изображения */
+.card__label {
+  padding: 4px 8px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: #ff6633;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #fff;
+}
+
+.card__bottom {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto; /* Занимаем всю оставшуюся высоту карточки */
+  padding: 10px;
+}
+
+.card__prices {
+  display: flex;
+  margin-bottom: 10px;
+  flex: 0 0 50%; /* Размещаем цены равномерно в две колонки */
+}
+
+.card__price::after {
+  content: "₽";
+  margin-left: 4px;
+  position: relative;
+}
+
+.card__price--discount {
+  font-weight: 700;
+  font-size: 19px;
+  color: #414141;
+  display: flex;
+  flex-wrap: wrap-reverse;
+}
+
+.card__price--discount::before {
+  content: "Со скидкой";
+  font-weight: 400;
+  font-size: 13px;
+  color: #bfbfbf;
+}
+
+.card__price--common {
+  font-weight: 400;
+  font-size: 17px;
+  color: #606060;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: flex-end;
+}
+
+.card__price--common::before {
+  font-weight: 400;
+  font-size: 13px;
+  color: #bfbfbf;
+}
+
+.card__title {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 150%;
+  color: #414141;
+}
+
+.card__title:hover {
+  color: #9cadb8;
+}
+
+.card__add {
+  display: block;
+  width: 100%;
+  font-weight: 400;
+  font-size: 17px;
+  color: #269ae9;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #269ae9;
+  border-radius: 4px;
+  cursor: pointer; /* Меняем курсор при наведении */
+  transition: 0.2s;
+  margin-top: auto; /* Прижимаем кнопку к низу карточки */
+}
+
+.card__add:hover {
+  border: 1px solid #9cadb8;
+  background-color: #9cadb8;
+  color: #fff;
+}
+.ct {
+     position: relative;
+     left: 500px;
+     top; 10px;
+}
+.div1 { display: inline; }
+.btn btn-secondary{
+    position: relative;
+    right: 12px;
+}
+
+a {
+    position: relative;
+    left: 12px;
+}
+
+
+p {
+    display:inline;
+    width:auto;
+}
+
+html {
+  background-color: #ffffff;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+}
+
+a {
+  color: #92badd;
+  display:inline-block;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+h2 {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display:inline-block;
+  margin: 40px 8px 10px 8px; 
+  color: #cccccc;
+}
+
+
+
+/* STRUCTURE */
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+}
+
+#formContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+#formFooter {
+  background-color: #f6f6f6;
+  border-top: 1px solid #dce8f1;
+  padding: 25px;
+  text-align: center;
+  -webkit-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
+}
+
+
+
+/* TABS */
+
+h2.inactive {
+  color: #cccccc;
+}
+
+h2.active {
+  color: #0d0d0d;
+  border-bottom: 2px solid #5fbae9;
+}
+
+
+
+/* FORM TYPOGRAPHY*/
+
+input[type=button], input[type=submit], input[type=reset]  {
+  background-color: #56baed;
+  border: none;
+  color: white;
+  padding: 15px 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 5px 20px 40px 20px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+  background-color: #39ace7;
+}
+
+input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
+  -moz-transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+input[type=text] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 85%;
+  border: 2px solid #f6f6f6;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+input[type=text]:focus {
+  background-color: #fff;
+  border-bottom: 2px solid #5fbae9;
+}
+
+input[type=text]:placeholder {
+  color: #cccccc;
+}
+
+
+
+/* ANIMATIONS */
+
+/* Simple CSS3 Fade-in-down Animation */
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+/* Simple CSS3 Fade-in Animation */
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.fadeIn {
+  opacity:0;
+  -webkit-animation:fadeIn ease-in 1;
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}
+
+.fadeIn.first {
+  -webkit-animation-delay: 0.4s;
+  -moz-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+.fadeIn.second {
+  -webkit-animation-delay: 0.6s;
+  -moz-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+}
+
+.fadeIn.third {
+  -webkit-animation-delay: 0.8s;
+  -moz-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+}
+
+.fadeIn.fourth {
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+  animation-delay: 1s;
+}
+
+/* Simple CSS3 Fade-in Animation */
+.underlineHover:after {
+  display: block;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: #56baed;
+  content: "";
+  transition: width 0.2s;
+}
+
+.underlineHover:hover {
+  color: #0d0d0d;
+}
+
+.underlineHover:hover:after{
+  width: 100%;
+}
+
+
+
+/* OTHERS */
+
+*:focus {
+    outline: none;
+} 
+
+#icon {
+  width:60%;
+}
+
+* {
+  box-sizing: border-box;
+}
