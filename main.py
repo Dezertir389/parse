@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify, render_template
 import json
-import requests
 from data import db_session
 from data.flowers import Flowers
 
@@ -8,9 +7,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 is_log = False
-
-
-
 
 @app.route('/sign_in')
 def log():
@@ -40,7 +36,7 @@ def info(title):
 
 
 def main():
-    db_session.global_init("db/blogs.db")
+    db_session.global_init("db/Flowers.db")
 
 
 if __name__ == '__main__':
