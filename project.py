@@ -1,65 +1,29 @@
-from flask import Flask, request, jsonify
-import json
-import requests
+from flask import Flask, request, jsonify, render_template, redirect, url_for
+from data import db_session
+from data.users import User
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
+@app.route('/sign_in')
+def log():
+    return render_template('sign_in.html')
 
-class Search:
-    def __init__(self, item):
-        self.item = item
+@app.route('/sign_up')
+def log_ib():
+    return render_template('sign_up.html')
 
-    def s_wb(self):
-        url = f"https://www.wildberries.ru/catalog/0/search.aspx?search={self.item}"
-        response = requests.get(url)
-        if response.status_code == 200:
-            try:
-                data = response.json()
-                return data
-            except json.JSONDecodeError:
-                return response.text
-        else:
-            return None
+@app.route('/register', methods=['POST'])
+def register():
+    login = request.form.get('login')
+    password = request.form.get('password')
 
-    def s_av(self):
-        url = f"https://www.avito.ru/kursk?q={self.item}"
-        response = requests.get(url)
-        if response.status_code == 200:
-            try:
-                data = response.json()
-                return data
-            except json.JSONDecodeError:
-                return response.text
-        else:
-            return None
+    if db_session.query(User).filter(User.login == login).first():
+        return 'Этот логин уже занят'
 
+    # Создаем нового пользователя
+    user = User(login=login, password=password)
+    db_session.add(user)
+    db_session.commit()
 
-def find_best_deal(item):
-    s = Search(item)
-    wildberries_data = s.s_wb()
-    avito_data = s.s_av()
-
-    if wildberries_data and avito_data:
-        best_deal = min(wildberries_data['price'], avito_data['price'])
-        return {'best_deal': best_deal}
-    else:
-        error_message = 'Failed to fetch data from:'
-        if not wildberries_data:
-            error_message += ' Wildberries'
-        if not avito_data:
-            error_message += ' Avito'
-        return {'error': error_message}
-
-
-@app.route('/search', methods=['GET'])
-def search():
-    search_item = request.args.get('item')
-    best_deal = find_best_deal(search_item)
-    if 'error' in best_deal:
-        return jsonify({'error': best_deal['error']}), 400
-    else:
-        return jsonify(best_deal)
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    return redirect(url_for('log'))
