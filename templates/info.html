@@ -6,17 +6,17 @@
 <br>
 <div class="single-item">
   <div class="left-set">
-    <img src="static/img/{{item[4]}}" alt=""/>
+    <img src="static/img/{{item[0]}}" alt=""/>
   </div>
   <div class="right-set">
-    <div class="name">{{item[0]}}</div>
-    <div class="price">Средняя цена: {{item[2]}}</div>
+    <div class="name">{{item[1]}}</div>
+    <div class="price">Средняя цена: {{item[3]}}</div>
     <div class="description">
     <p>
-      {{item[1]}}
+      {{item[2]}}
     </p>
     </div>
-    {%for n in item[3].split('+')%}
+    {%for n in item[4].split('+')%}
     <form action={{n}}>
       <button>Перейти в магазин</button>
     </form>
