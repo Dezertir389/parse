@@ -1,27 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<br>
-<br>
-<br>
-<div class="single-item">
-  <div class="left-set">
-    <img src="static/img/{{item[0]}}" alt=""/>
+<div class="sas">
+  <div class="photo">
+    <img src="{{url_for('static', filename='img/' + item[4])}}">
   </div>
-  <div class="right-set">
-    <div class="name">{{item[1]}}</div>
-    <div class="price">Средняя цена: {{item[3]}}</div>
-    <div class="description">
-    <p>
-      {{item[2]}}
-    </p>
-    </div>
-    {%for n in item[4].split('+')%}
+  <div class="description">
+    <h2>{{item[0]}}</h2>
+    <h1>{{item[2]}} ₽</h1>
+    <p>{{item[1]}}</p>
+        {%for n in item[3].split('+')%}
     <form action={{n}}>
-      <button>Перейти в магазин</button>
+      <button class="btn btn-outline-dark btn-lg">Перейти в магазин</button>
     </form>
     <br>
     {% endfor %}
+    <button class="but">Wishlist</button>
   </div>
 </div>
 {% endblock %}
