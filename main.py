@@ -16,7 +16,7 @@ lia = []
 def add_wish(name):
     user = db_sess.query(User).filter(User.id == current_user.id).first()
     if bool(user.flowers):
-        if name not in user.flowers.split(';') + [name]:
+        if name not in user.flowers.split(';'):
             user.flowers = ';'.join(user.flowers.split(';') + [name])
     else:
         user.flowers = name
