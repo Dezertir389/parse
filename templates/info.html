@@ -1,21 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="sas">
-  <div class="photo">
-    <img src="{{url_for('static', filename='img/' + item[4])}}">
+  <div class="sas" xmlns="http://www.w3.org/1999/html">
+    <div class="photo">
+      <img src="{{url_for('static', filename='img/' + item[4])}}">
+    </div>
+    <div class="description">
+      <h2>{{item[0]}}</h2>
+      <h1>{{item[2]}} ₽</h1>
+      <p>{{item[1]}}</p>
+      <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group" role="group" aria-label="First group">
+       {%for n in item[3].split('+')%}
+      <form action={{n}}>
+        <button class="btn btn-outline-dark btn-lg">{{item[3].split('+').index(n) + 1}}</button>
+      </form>
+      <br>
+      {% endfor %}
+        </div>
+      {% if current_user.is_authenticated %}
+          {% if wish %}
+            <a href="/del_wish/{{item[0]}}">
+                  <button class="but">Убрать из избранного</button>
+            </a>
+          {% else %}
+            <a href="/add_wish/{{item[0]}}">
+              <button class="but">Добавить в избранное</button>
+            </a>
+      {% endif %}
+      {% else %}
+        <label> Войдите в аккаунт чтобы добавить в избранное</label>
+      {% endif %}
+    </div>
   </div>
-  <div class="description">
-    <h2>{{item[0]}}</h2>
-    <h1>{{item[2]}} ₽</h1>
-    <p>{{item[1]}}</p>
-        {%for n in item[3].split('+')%}
-    <form action={{n}}>
-      <button class="btn btn-outline-dark btn-lg">Перейти в магазин</button>
-    </form>
-    <br>
-    {% endfor %}
-    <button class="but">Wishlist</button>
-  </div>
-</div>
 {% endblock %}

@@ -34,6 +34,8 @@
                 {% endfor %}
             </p>
             <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+            <br>
+            <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
             <div>{{ message }}</div>
         </form>
 

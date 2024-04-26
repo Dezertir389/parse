@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container emp-profile">
+            <a class="exit" href="/logout">
+                <button class="btn btn-outline-dark">Выйти</button>
+            </a>
+            <form>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src="{{url_for('static', filename='img/icon.png')}}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                            <div class="row">
+                                    <div class="col-md-6">
+                                        <h5>
+                                        {{item[1].lower().capitalize()}}
+                                    </h5>
+                                    </div>
+                                </div>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="/us_page/{{item[2]}}" role="tab" aria-controls="profile" aria-selected="false">Общее</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="/favorites/{{item[2]}}" role="tab" aria-controls="home" aria-selected="true">Избранное</a>
+                                </li>
+                            </ul>
+                     <div class="cards_V">
+                     {% for im in item[0] %}
+                      <div class="card_V">
+                        <!-- Верхняя часть -->
+                        <div class="card__top">
+                          <!-- Изображение-ссылка товара -->
+                          <a href="/info/{{im[1]}}" class="card__image">
+                            <img src="{{url_for('static', filename='img/' + im[0])}}">
+                          </a>
+                        </div>
+                        <!-- Нижняя часть -->
+                        <div class="card__bottom">
+                        <div class="card__prices">
+                          <div class="card__price card__price--common">{{im[2]}}</div>
+                        </div>
+                          <!-- Ссылка-название товара -->
+                          <a href="/info/{{im[1]}}" class="card__title">
+                            {{im[1]}}
+                          </a>
+                          <!-- Кнопка добавить в корзину -->
+                          <a href="/info/{{im[1]}}">
+                          <button  class="card__add">Посмотреть</button>
+                          </a>
+                        </div>
+                      </div>
+                      {% endfor %}
+                         </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-work">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+{% endblock %}
