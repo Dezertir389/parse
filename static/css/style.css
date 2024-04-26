@@ -1,5 +1,43 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,300,500,700);
+.search {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+.searchTerm {
+    width: 100%;
+    border: 3px solid #008000;
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+.searchTerm:focus{
+    color: #aaaaa;
+}
+    .searchButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #E0FFFF;
+    background: #E0FFFF;
+    text-align: center;
+    color: #eeeeee;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+.wrap{
+    width: 30%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.exit{
+     left: 90%;
+}
 .emp-profile{
     padding: 3%;
     margin-top: 3%;
@@ -108,6 +146,8 @@
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
     transition: all 0.3s;
     
+     
+   
     &:hover {
       
       box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
@@ -353,9 +393,31 @@
   row-gap: 40px; /* Отступ между рядами */
   margin: 0 auto;
 }
+.cards_V {
+  display: grid;
+  /* Автоматически заполняем на всю ширину grid-контейнера */
+  grid-template-columns: repeat(auto-fill, 180px);
+  width: 120%;
+  max-width: 1000px; /* Ширина grid-контейнера */
+  justify-content: center;
+  justify-items: center; /* Размещаем карточку по центру */
+  column-gap: 30px; /* Отступ между колонками */
+  row-gap: 40px; /* Отступ между рядами */
+  margin: 0 auto;
+}
 .card {
   width: 225px;
   min-height: 350px;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column; /* Размещаем элементы в колонку */
+  border-radius: 4px;
+  transition: 0.2s;
+  position: relative;
+}
+.card_V {
+  width: 180px;
+  min-height: 270px;
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column; /* Размещаем элементы в колонку */
@@ -502,7 +564,10 @@
     position: relative;
     right: 12px;
 }
-
+.z {
+    position: relative;
+    right: 12px;
+}
 a {
     position: relative;
     left: 12px;
