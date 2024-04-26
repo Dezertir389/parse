@@ -14,6 +14,7 @@ class Flowers(SqlAlchemyBase):
     about = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     png = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     mid_price = sqlalchemy.Column(sqlalchemy.Integer, nullable=False)
+    uhod = sqlalchemy.Column(sqlalchemy.String, nullable=False)
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)
