@@ -69,9 +69,10 @@ def us_page(id):
 def us_page_fav(id):
     user = db_sess.query(User).filter(User.id == id).first()
     li = []
-    for flow in db_sess.query(Flowers).all():
-        if flow.name in user.flowers:
-            li.append((flow.png, flow.name, flow.mid_price))
+    if bool(user.flowers):
+        for flow in db_sess.query(Flowers).all():
+            if flow.name in user.flowers:
+                li.append((flow.png, flow.name, flow.mid_price))
     inf = (li, user.name, user.id)
     return render_template('user_page_fav.html', item=inf, title=f'{user.name}')
 
@@ -123,6 +124,7 @@ def main_page():
     li = []
     for flow in db_sess.query(Flowers).all():
         li.append((flow.png, flow.name, flow.mid_price))
+    li = sorted(li, key=lambda x: x[1])
     return render_template('search.html', inf=li, title='Свежая жизнь')
 
 
@@ -133,11 +135,18 @@ def info(title):
         n = db_sess.query(User).filter(User.id == current_user.id).first()
     flow = db_sess.query(Flowers).filter(Flowers.name == title).first()
     inf = (flow.name, flow.about, flow.mid_price, flow.links, flow.png)
-    if bool(n) and bool():
-        if bool(n.flowers):
-            return render_template('info.html',
-                                   item=inf, wish=flow.name in n.flowers, title=f'{flow.name}')
+    if bool(n) and bool(n.flowers):
+        return render_template('info.html',
+                               item=inf, wish=flow.name in n.flowers, title=f'{flow.name}')
     return render_template('info.html', item=inf, wish=False, title=f'{flow.name}')
+
+
+@app.route('/info_uh/<title>')
+def info_uh(title):
+    flow = db_sess.query(Flowers).filter(Flowers.name == title).first()
+    inf = (flow.png, flow.uhod, flow.name)
+    return render_template('info_uhod.html', item=inf, title=f'{flow.name}')
+
 
 
 def main():
